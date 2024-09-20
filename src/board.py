@@ -6,7 +6,7 @@ class Board:
         self._win = win
         self.__surface= [[None for i in range(3)] for j in range(3)]
         self.board_width = 200
-        self.board_height = 240
+        self.board_height = 250
         self.cell_size = cell_size
     
     def create_board(self):
@@ -43,9 +43,15 @@ class Board:
                 
                 
                 self._animate()
-        
+        return self.__surface
                 
     def _animate(self):
         self._win.redraw()
         time.sleep(0.25)   
        
+    def is_board_full(self):
+        for row in self.__surface:
+            for cell in row:
+                if cell.get_val() is None:
+                    return False
+        return True

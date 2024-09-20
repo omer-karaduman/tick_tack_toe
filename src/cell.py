@@ -14,13 +14,8 @@ class Cell:
         self._y1 = y1
         self._y2 = y2
         self.win = win
-
-    def set_val(self,val):
-        if val == "x":
-            self.__is_x = True
-        else:
-            self.__is_x = False
-
+        
+    
     def get_val(self):
         return self.__is_x
     
@@ -38,17 +33,23 @@ class Cell:
     def fill_with_X(self):
         line1 = Line(point1=Point(self._x1+X_TUNE,self._y1+X_TUNE),point2=Point(self._x2-X_TUNE,self._y2-X_TUNE))
         line2 = Line(point1=Point(self._x1+X_TUNE,self._y2-X_TUNE),point2=Point(self._x2-X_TUNE,self._y1+X_TUNE))
-        self.win.draw_line(line1,width=6,fill_color = "red")
-        self._animate()
-        self.win.draw_line(line2,width=6,fill_color = "red")
-        self._animate()
+        self.win.draw_line(line1,width=6,fill_color = "blue")
+        self._animate(0)
+        self.win.draw_line(line2,width=6,fill_color = "blue")
+        self._animate(0)
+        self.__is_x = True
 
 
     def fill_with_O(self):
         self.win.draw_oval(self._x1+O_TUNE,self._y1+O_TUNE,self._x2-O_TUNE,self._y2-O_TUNE)
         self._animate()
-    
+        self.__is_x = False
 
-    def _animate(self):
+    def is_fill(self):
+        if self.__is_x == None:
+            return False
+        return True
+
+    def _animate(self,custom_time=0.30):
         self.win.redraw()
-        time.sleep(0.30)   
+        time.sleep(custom_time)   
